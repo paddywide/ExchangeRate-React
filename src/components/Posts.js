@@ -4,15 +4,18 @@ import { getposts } from '../services/postService';
 export default function Posts() {
     const [posts, setPosts] = useState([]);
 
-    // useEffect(() => {
-    //     getposts().then((response) => {
-    //         setPosts(response.data);
-    //         console.log(response.data);
-    //     });
-    // }, []);
     useEffect(() => {
-            console.log("Load Post");
+        getposts().then((response) => {
+            //setPosts(response.data);
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }, []);
+    // useEffect(() => {
+    //         console.log("Load Post"); 
+    // }, []);
 
     return <></>;
 }

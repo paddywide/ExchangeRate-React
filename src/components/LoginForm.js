@@ -15,8 +15,8 @@ export const LoginForm = ({ onLoginSuccess }) => {
 
   const handleLogin = async () => {
     try {
-      const user = await login(credentials); // Call the login API
-      onLoginSuccess(user); // Notify parent of login success
+      const user = await login(credentials);
+      onLoginSuccess(user);
     } catch (err) {
       setError("Invalid email or password.");
     }

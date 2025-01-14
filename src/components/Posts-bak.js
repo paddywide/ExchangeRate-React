@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { getposts } from '../services/postService';
+import { getposts } from '../services/postService-bak';
 
 export default function Posts() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         getposts().then((response) => {
-            //setPosts(response.data);
+            setPosts(response.data);
             console.log(response.data);
         })
         .catch((error) => {
@@ -15,7 +15,7 @@ export default function Posts() {
     }, []);
     // useEffect(() => {
     //         console.log("Load Post"); 
-    // }, []);
+    // }, []); 
 
     return <></>;
 }

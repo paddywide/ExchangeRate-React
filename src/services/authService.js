@@ -36,11 +36,11 @@ export const register = async (userData) => {
   }
 };
 
-export const logout = async () => {
+export const logout = async (email ) => {
     try {
       const response = await axios.post(
         `${API_URL}/logout`,
-        {},
+        { email },
         {
           headers: {
             "Content-Type": "application/json",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { login } from "../services/authService";
+import { login } from "../../services/authService";
 import { Button, TextField, Typography, Box } from "@mui/material";
 
 export const LoginForm = ({ onLoginSuccess }) => {
@@ -18,7 +18,13 @@ export const LoginForm = ({ onLoginSuccess }) => {
       const user = await login(credentials);
       onLoginSuccess(user);
     } catch (err) {
-      setError("Invalid email or password.");
+
+      if (err.response && err.response.data) {
+        const apiError = err.response.data;
+        setError(`${apiError.status}, ${apiError.title}` || "An error occurred.");
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
     }
   };
 

@@ -1,13 +1,27 @@
 import React from "react";
-import { Typography, Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { projectDescriptionContent } from "../content/ProjectDescription";
+import { CurrencyConverter } from "./CurrencyConverter/CurrencyConverter"; 
 
-export const HomePage = () => (
-  <Box sx={{ padding: "16px" }}>
-    <Typography variant="h4" gutterBottom>
-      Welcome to the Home Page!
-    </Typography>
-    <Typography>
-      This is the content of the homepage. Log in to access personalized features.
-    </Typography>
-  </Box>
-);
+export const HomePage = () => {
+  const handleConversion = (convertedValue) => {
+    console.log("Converted value:", convertedValue);
+  };
+
+  return (
+    <Box sx={{ padding: "16px" }}>
+      <Typography variant="h5" gutterBottom>
+        Solution Overview
+      </Typography>
+      <Typography
+        variant="body1"
+        component="div"
+        sx={{ whiteSpace: "pre-line", marginBottom: "16px" }}
+      >
+        {projectDescriptionContent}
+      </Typography>
+
+      <CurrencyConverter onConvert={handleConversion} />
+    </Box>
+  );
+};

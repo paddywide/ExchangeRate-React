@@ -28,7 +28,7 @@ const getToken = () => {
   };
 export const register = async (userData) => {
   try {
-    const response = await axios.post(`${API_URL}/register`, userData);
+    const response = await axios.post(`${API_URL}/api/Auth/register`, userData);
     return response.data; 
   } catch (error) {
     console.error("Registration failed:", error);
@@ -38,9 +38,7 @@ export const register = async (userData) => {
 
 export const logout = async (email ) => {
     try {
-      const response = await axios.post(
-        `${API_URL}/logout`,
-        { email },
+      const response = await axios.post(`${API_URL}/api/Auth/logout`, { email },
         {
           headers: {
             "Content-Type": "application/json",

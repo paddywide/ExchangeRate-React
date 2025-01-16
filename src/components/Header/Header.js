@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { IconButton, Typography, Box, Menu, MenuItem, Modal } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { LoginForm } from "./LoginForm";
+import { useAuth  } from "../../hooks/useAuth";
 
-export const Header = ({ isLoggedIn, username, handleLogin, handleLogout }) => {
+export const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const { isLoggedIn, username, handleLogin, handleLogout } = useAuth();
   const handleMenuClick = (event) => setAnchorEl(event.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
 

@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL;
-
+const getToken = () => {
+  return localStorage.getItem("authToken"); 
+};
 
 export const getExchangeRate = async (amount, inputCurrency, outputCurrancy) => {
   try {
@@ -9,6 +11,12 @@ export const getExchangeRate = async (amount, inputCurrency, outputCurrancy) => 
       amount,
       inputCurrency,
       outputCurrancy,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`, 
+      },
     });
 
     return response.data; 

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TextField, Button, MenuItem, Select, Box } from "@mui/material";
 import { getExchangeRate } from "../../services/currencyService"; 
+import { useAuth  } from "../../hooks/useAuth";
 
 export const CurrencyConverter = () => {
   const [inputValue, setInputValue] = useState("");
   const [convertedValue, setConvertedValue] = useState("");
   const [exchangeRate, setExchangeRate] = useState("");
+  const { isLoggedIn } = useAuth();
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -43,8 +45,8 @@ export const CurrencyConverter = () => {
       </Select>
 
       {/* Convert Button */}
-      <Button variant="contained" color="primary" onClick={handleConvert}>
-        Convert
+      <Button variant="contained" color="primary" onClick={handleConvert} disabled={!isLoggedIn}>
+        {isLoggedIn ? "Convert" : "Login to Convert"}
       </Button>
 
       {/* Converted Value Display */}
@@ -52,7 +54,7 @@ export const CurrencyConverter = () => {
         label="Converted Value"
         variant="outlined"
         value={convertedValue}
-        InputProps={{
+        slotProps={{
           readOnly: true,
         }}
         sx={{ width: "150px" }}

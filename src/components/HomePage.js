@@ -21,7 +21,9 @@ export const HomePage = () => {
         {projectDescriptionContent}
       </Typography>
 
-      <CurrencyConverter onConvert={handleConversion} />
+      <Box sx={{ marginTop: "32px" }}>
+        <CurrencyConverter onConvert={handleConversion} />
+      </Box>
     </Box>
   );
 };

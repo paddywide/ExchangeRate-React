@@ -4,11 +4,7 @@ files:
   - source: /
     destination: /wwwroot/react-app
 hooks:
-  BeforeInstall:
-    - location: output/stop_service.sh
-      timeout: 300
-      runas: root
   AfterInstall:
-    - location: output/start_service.sh
+    - location: build/reload_service.sh
       timeout: 300
       runas: root

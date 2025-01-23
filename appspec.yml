@@ -5,6 +5,6 @@ files:
     destination: /wwwroot/react-app
 hooks:
   AfterInstall:
-    - location: build/reload_service.sh
+    - location: reload_service.sh
       timeout: 300
       runas: root

@@ -1,9 +1,6 @@
 name: Build and Push to Amazon ECR
 
-on:
-  push:
-    branches:
-      - main # Trigger this workflow only on pushes to the main branch
+on: [push]
 
 jobs:
   build-and-push:
@@ -11,10 +8,12 @@ jobs:
 
     steps:
       # Step 1: Checkout the repository
+      - run: echo "Checkout source code"
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Step 2: Log in to Amazon ECR
+      - run: echo "Log in to Amazon ECR"
       - name: Log in to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
@@ -24,12 +23,15 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       # Step 3: Build the Docker image
+      - run: echo "Build Docker image"
       - name: Build Docker image
         run: |
           docker build -t exchange-rate-react .
           docker tag exchangerate-react:latest 741448956915.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/er/exchangerate-react:latest
 
       # Step 4: Push the Docker image to Amazon ECR
+      - run: echo "Push Docker image to Amazon ECR"
       - name: Push Docker image to Amazon ECR
         run: |
           docker push 741448956915.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/er/exchangerate-react:latest
+      - run: echo "Complete"

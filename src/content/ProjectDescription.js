@@ -1,27 +1,123 @@
-export const projectDescriptionContent = `
-This solution is conposited by 2 repos:
-https://github.com/paddywide/ExchangeServiceAPI
-https://github.com/paddywide/ExchangeRate-React
+import React from "react";
+import { Box, Typography } from "@mui/material";
 
-To the API, it uses below design and tech:
-Architecture and pattern: 
-Clean Architecture, Result Pattern, Domain event, Aggregate, Repository Pattern
+const ProjectDescriptionContent = () => {
+  return (
+    <>
+      <Typography variant="h4" gutterBottom>
+        Solution Overview
+      </Typography>
+      <Typography variant="h5" gutterBottom sx={{ marginTop: "32px" }}>
+        Repo
+      </Typography>
+      <Typography
+        variant="body1"
+        component="div"
+        sx={{ whiteSpace: "pre-line", marginBottom: "16px" }}
+      >
+        This solution is composed of 2 repositories:
+        <Box sx={{ marginTop: "8px" }}>
+          <a
+            href="https://github.com/paddywide/ExchangeServiceAPI"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              textDecoration: "none",
+              color: "#1976d2",
+              fontWeight: "bold",
+            }}
+          >
+            ExchangeServiceAPI
+          </a>
+        </Box>
+        <Box sx={{ marginTop: "8px" }}>
+          <a
+            href="https://github.com/paddywide/ExchangeRate-React"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              textDecoration: "none",
+              color: "#1976d2",
+              fontWeight: "bold",
+            }}
+          >
+            ExchangeRate-React
+          </a>
+        </Box>
+      </Typography>
 
-.Net Core 8:
-Primitive and Value Object, httpClientFactory
+      <Typography variant="h5" gutterBottom sx={{ marginTop: "32px" }}>
+        Technologies Employed
+      </Typography>
+      <Typography
+        variant="body1"
+        component="div"
+        sx={{ whiteSpace: "pre-line", marginBottom: "16px" }}
+      >
+        <Box sx={{ marginTop: "16px" }}>
+          <strong>API:</strong>
+        </Box>
+        <Box component="ul" sx={{ marginTop: "8px", paddingLeft: "16px" }}>
+          <li>
+            <strong>Architecture and Pattern:</strong> Clean Architecture,
+            Result Pattern, Domain Event, Aggregate, Repository Pattern
+          </li>
+          <li>
+            <strong>.Net Core 8:</strong> Primitive and Value Object,
+            httpClientFactory
+          </li>
+          <li>
+            <strong>Security:</strong> JWT, OAuth2.0
+          </li>
+          <li>
+            <strong>NuGet:</strong> Exception middleware, MediatR,
+            FluentValidation, AutoMapper
+          </li>
+          <li>
+            <strong>DB:</strong> SQLite, Code First
+          </li>
+        </Box>
 
-Security:
-JWT, OAuth2.0
+        <Box sx={{ marginTop: "32px" }}>
+          <strong>AWS:</strong>
+        </Box>
+        <Box component="ul" sx={{ marginTop: "8px", paddingLeft: "16px" }}>
+          <li>
+            <strong>Instance:</strong> EC2
+          </li>
+          <li>
+            <strong>Web server:</strong> Nginx
+          </li>
+          <li>
+            <strong>Storage:</strong> S3
+          </li>
+          <li>
+            <strong>CI/CD:</strong> CodePipeline, CodeBuild, CodeDeploy
+          </li>
+        </Box>
 
-Nuget:
-Exception middleware, MediatR, FluentValidation, AutoMapper
+ 
+        <Box sx={{ marginTop: "32px" }}>
+          <strong>Functionality:</strong>
+        </Box>
+        <Box component="ul" sx={{ marginTop: "8px", paddingLeft: "16px" }}>
+          <li>
+            <strong>Authentication:</strong> It has Login, Register, and Logout
+            functions. When a user logs out, it saves the token to the blacklist.
+          </li>
+          <li>
+            <strong>Exchange Rate:</strong>  It uses httpClientFactory to get the
+            exchange rate from a 3rd-party API and saves the reques body to the database.
+          </li>
+          <li>
+            <strong>React:</strong> Convert button is only enable when loggin. It can display login errors received from the
+            API.
+          </li>
+        </Box>
 
-DB:
-SQLite, Code first
+      </Typography>
+    </>
+  );
+};
 
-
-It has been deployed to AWS EC2. It use Nginx as reverse proxy and docker to run the app.
-To the authentication, it has Login, Register and Logout function. When user logout, it will save the token to the blacklist.
-To the exchange rate, it uses httpClientFactory to get the exchange rate from the 3rd party API and save to the DB.
-To react, it can display the login error which response from api, try to enter a different email to login.
-`;
+export default ProjectDescriptionContent;

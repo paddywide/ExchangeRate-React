@@ -35,12 +35,12 @@ jobs:
       - name: Log in to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
-        
+
       # Step 3: Build the Docker image
       - run: echo "Build Docker image"
       - name: Build Docker image
         run: |
-          docker build -t exchange-rate-react .
+          docker build -t exchangerate-react .
           docker tag exchangerate-react:latest 741448956915.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/er/exchangerate-react:latest
 
       # Step 4: Push the Docker image to Amazon ECR

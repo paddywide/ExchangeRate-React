@@ -39,7 +39,7 @@ jobs:
       - run: echo "Build Docker image"
       - name: Build Docker image
         run: |
-          docker build -t exchangerate-react .
+          docker build -t exchangerate-react:react .
           docker tag exchangerate-react:react 741448956915.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/er/exchangerate-react:react
 
       # Step 4: Push the Docker image to Amazon ECR

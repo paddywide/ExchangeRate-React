@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "container-ER-react",
-            "image": "er/exchangerate-react/react",
+            "image": "741448956915.dkr.ecr.ap-southeast-2.amazonaws.com/er/exchangerate-react:react",
             "cpu": 0,
             "portMappings": [
                 {

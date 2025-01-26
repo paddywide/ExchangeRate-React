@@ -94,7 +94,10 @@ const ProjectDescriptionContent = () => {
           <li>
             <strong>CI/CD:</strong> CodePipeline, CodeBuild, CodeDeploy
           </li>
-        </Box>
+          <li>
+            <strong>Containerized CI/CD:</strong> Docker, Github Actions, ECR, ECS, Fargate
+          </li>
+          </Box>
 
  
         <Box sx={{ marginTop: "32px" }}>

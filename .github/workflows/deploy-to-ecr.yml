@@ -12,8 +12,6 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-
-
       - name: Verify AWS CLI Installation
         run: aws --version
 
@@ -48,12 +46,33 @@ jobs:
         run: |
           docker push 741448956915.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/er/exchangerate-react:react
       - run: echo "Complete"
-
       # Step 5: Deploy to Amazon ECS
-      - name: Deploy to Amazon ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      # below code is working
+      # - name: Deploy to Amazon ECS
+      #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      #   with:
+      #     task-definition: .github/workflows/ecs-task-from-ecr.json
+      #     service: ecs-service
+      #     cluster: ECS-exchange-rate-wei
+      #     wait-for-service-stability: true
+
+      # Step 6: Deploy to EC2
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
         with:
-          task-definition: .github/workflows/ecs-task-from-ecr.json
-          service: ecs-service
-          cluster: ECS-exchange-rate-wei
-          wait-for-service-stability: true
+          host: ${{ secrets.EC2_HOST }} # EC2 public IP or DNS
+          username: ec2-user # EC2 username
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # Private key for SSH
+          script: |
+            # Log in to ECR
+            aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com
+
+            # Pull the latest image
+            docker pull 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com/er/exchangerate-react:react
+
+            # Stop and remove the existing container
+            docker stop react-app || true
+            docker rm react-app || true
+
+            # Run the new container
+            docker run -d --name react-app -p 80:80 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com/er/exchangerate-react:react

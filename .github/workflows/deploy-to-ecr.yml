@@ -57,7 +57,12 @@ jobs:
       #     wait-for-service-stability: true
 
       # Step 6: Deploy to EC2
-      - name: Deploy to EC2
+      - name:
+          Deploy to EC2
+          echo "Checking SSH key file:"
+          ls -lah ~/.ssh/
+          cat ~/.ssh/id_rsa | head -n 5 # Show only first few lines for verification
+          #echo "End of SSH key preview"
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }} # EC2 public IP or DNS

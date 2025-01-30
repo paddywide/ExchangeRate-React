@@ -34,7 +34,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       # Step 3: Build the Docker image
-      - run: echo "Build Docker image"
       - name: Build Docker image
         run: |
           docker build -t exchangerate-react:react .
@@ -73,11 +72,12 @@ jobs:
             aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com
 
             # Pull the latest image
-            docker pull 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com/er/exchangerate-react:react
+            docker pull --no-cache 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com/er/exchangerate-react:react
 
             # Stop and remove the existing container
             docker stop react-app || true
             docker rm react-app || true
+            docker image prune -a -f  # Remove old images to force pulling the latest one
 
             # Run the new container
             docker run -d --name react-app --network my-network -p 80:80 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com/er/exchangerate-react:react

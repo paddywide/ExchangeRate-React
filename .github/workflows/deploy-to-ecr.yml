@@ -58,9 +58,6 @@ jobs:
       # Step 6: Deploy to EC2
       - name:
           Deploy to EC2
-          echo "Checking SSH key file:"
-          ls -lah ~/.ssh/
-          cat ~/.ssh/id_rsa | head -n 5 # Show only first few lines for verification
           #echo "End of SSH key preview"
         uses: appleboy/ssh-action@master
         with:
@@ -72,12 +69,15 @@ jobs:
             aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com
 
             # Pull the latest image
-            docker pull --no-cache 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com/er/exchangerate-react:react
+            docker pull 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com/er/exchangerate-react:react
 
             # Stop and remove the existing container
             docker stop react-app || true
             docker rm react-app || true
             docker image prune -a -f  # Remove old images to force pulling the latest one
+
+            # Remove the old image to force re-pulling the latest one
+            #docker rmi 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com/er/exchangerate-react:react || true
 
             # Run the new container
             docker run -d --name react-app --network my-network -p 80:80 741448956915.dkr.ecr.ap-southeast-2.amazonaws.com/er/exchangerate-react:react

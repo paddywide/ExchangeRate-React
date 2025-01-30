@@ -43,7 +43,7 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: |
           docker push 741448956915.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/er/exchangerate-react:react
-      - run: echo "Complete"
+      - run: echo "Deploying EC2 Host ${{ secrets.EC2_HOST }}"
       # Step 5: Deploy to Amazon ECS
       # below code is working
       # - name: Deploy to Amazon ECS

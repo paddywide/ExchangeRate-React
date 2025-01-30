@@ -12,14 +12,14 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      - name: Verify AWS CLI Installation
-        run: aws --version
+      # - name: Verify AWS CLI Installation
+      #   run: aws --version
 
-      - name: Test AWS CLI Configuration
-        run: aws sts get-caller-identity --region ${{ secrets.AWS_REGION }}
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      # - name: Test AWS CLI Configuration
+      #   run: aws sts get-caller-identity --region ${{ secrets.AWS_REGION }}
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       # Step 2: Log in to Amazon ECR
       - name: Prepare AWS Credentials
@@ -40,7 +40,6 @@ jobs:
           docker tag exchangerate-react:react 741448956915.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/er/exchangerate-react:react
 
       # Step 4: Push the Docker image to Amazon ECR
-      - run: echo "Push Docker image to Amazon ECR"
       - name: Push Docker image to Amazon ECR
         run: |
           docker push 741448956915.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/er/exchangerate-react:react

@@ -98,7 +98,7 @@ const ProjectDescriptionContent = () => {
             <strong>Containerized CI/CD:</strong> Docker, Github Actions, ECR, ECS, Fargate
           </li>
           </Box>
-
+          {process.env.REACT_APP_API_URL}
  
         <Box sx={{ marginTop: "32px" }}>
           <strong>Functionality:</strong>

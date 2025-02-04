@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { getposts } from '../services/postService-bak';
+import { getposts } from '../../services/postService-bak';
 
 export default function Posts() {
     const [posts, setPosts] = useState([]);

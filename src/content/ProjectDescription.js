@@ -95,10 +95,14 @@ const ProjectDescriptionContent = () => {
             <strong>CI/CD:</strong> CodePipeline, CodeBuild, CodeDeploy
           </li>
           <li>
-            <strong>Containerized CI/CD:</strong> Docker, Github Actions, ECR, ECS, Fargate
+            <strong>Containerized CI/CD:</strong> Docker, Github Actions, ECR, ECS<sup>*</sup>, Fargate<sup>*</sup>
           </li>
           </Box>
- 
+
+          <Typography variant="caption" sx={{ marginTop: "-10px", display: "block"}}>
+            * It's already set up but not used right now.
+          </Typography>
+
         <Box sx={{ marginTop: "32px" }}>
           <strong>Functionality:</strong>
         </Box>

@@ -1,10 +1,9 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-//import { projectDescriptionContent } from "../content/ProjectDescription";
-import { CurrencyConverter } from "./CurrencyConverter/CurrencyConverter"; 
+import { CurrencyConverter } from "../components/CurrencyConverter/CurrencyConverter"; 
 import ProjectDescriptionContent from "../content/ProjectDescription";
 
-export const HomePage = () => {
+const HomePage = () => {
   const handleConversion = (convertedValue) => {
     console.log("Converted value:", convertedValue);
   };
@@ -25,3 +24,5 @@ export const HomePage = () => {
     </Box>
   );
 };
+
+export default HomePage
